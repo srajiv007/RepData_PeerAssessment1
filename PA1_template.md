@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 
 
 ## Loading and preprocessing the data
@@ -24,7 +29,7 @@ agg_steps_all = merge(agg_steps_sum, agg_steps_count, by="date")
 hist(agg_steps_sum$sum)
 ```
 
-![](PA1_template_files/figure-html/aggregatesteps-1.png)<!-- -->
+![plot of chunk aggregatesteps](figure/aggregatesteps-1.png)
 
 ```r
 # Mean - total steps per day
@@ -54,7 +59,7 @@ t=ts(agg_steps_interval)
 plot(t[,2], type="l", xlab="5-min. interval", ylab="avg. steps", main="avg. steps over 5-min. interval")
 ```
 
-![](PA1_template_files/figure-html/intervaldata-1.png)<!-- -->
+![plot of chunk intervaldata](figure/intervaldata-1.png)
 
 ```r
 #Max Avg steps over all intervals
@@ -87,7 +92,7 @@ names(replaced.df.sum)=c("date", "steps")
 hist(replaced.df.sum$steps)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
 
 ```r
 mean(replaced.df.sum$steps)
@@ -120,4 +125,4 @@ names(agg)=c("interval", "day", "avg.steps")
 xyplot(avg.steps~interval|day, data=agg, main="Avg. steps in 5-min interval", xlab="interval", ylab="avg. steps", type="l", layout=c(1,2))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
