@@ -17,7 +17,7 @@ act_clean$steps = as.numeric(act_clean$steps)
 ```
 
 ## What is mean total number of steps taken per day?
-```{r aggregatesteps, echo=TRUE}
+```{r aggregatesteps, echo=TRUE, fig.path="figure/aggregate-"}
 agg_steps_sum = aggregate(act_clean$steps, by=list(date=act_clean$date), FUN=sum, na.rm=TRUE)
 names(agg_steps_sum) = c("date", "sum")
 agg_steps_count = transform(table(act_clean$date))
@@ -33,7 +33,7 @@ median(agg_steps_all$sum)
 
 
 ## What is the average daily activity pattern?
-```{r intervaldata, echo=TRUE}
+```{r intervaldata, echo=TRUE, fig.path="figure/interval-"}
 agg_steps_interval=aggregate(act_clean$steps, by=list(act_clean$interval), FUN=mean)
 names(agg_steps_interval)=c("interval", "avg.steps")
 t=ts(agg_steps_interval)
@@ -44,7 +44,7 @@ max(agg_steps_interval$avg.steps)
 
 
 ## Imputing missing values
-```{r, echo=TRUE}
+```{r imputeddata, echo=TRUE, fig.path="figure/imputed-"}
 #Total missing rows
 sum(is.na(act_data$steps))
 #Cleaning NA values 
@@ -53,6 +53,7 @@ replaced.df$steps[is.na(replaced.df$steps)]=replaced.df$avg.steps[is.na(replaced
 replaced.df=replaced.df[order(replaced.df$date, replaced.df$interval),]
 replaced.df.sum = aggregate(replaced.df$steps, by=list(date=replaced.df$date), FUN=sum, na.rm=FALSE)
 names(replaced.df.sum)=c("date", "steps")
+
 hist(replaced.df.sum$steps)
 mean(replaced.df.sum$steps)
 median(replaced.df.sum$steps)
@@ -60,7 +61,7 @@ median(replaced.df.sum$steps)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r}
+```{r, echo=TRUE, fig.path="figure/weekday-"}
 library(lattice)
 # Creating weekday factor column in the imputed data frame
 act_clean_data=replaced.df
