@@ -29,7 +29,7 @@ agg_steps_all = merge(agg_steps_sum, agg_steps_count, by="date")
 hist(agg_steps_sum$sum)
 ```
 
-![plot of chunk aggregatesteps](figure/aggregatesteps-1.png)
+![plot of chunk aggregatesteps](figure/aggregate-aggregatesteps-1.png)
 
 ```r
 # Mean - total steps per day
@@ -59,7 +59,7 @@ t=ts(agg_steps_interval)
 plot(t[,2], type="l", xlab="5-min. interval", ylab="avg. steps", main="avg. steps over 5-min. interval")
 ```
 
-![plot of chunk intervaldata](figure/intervaldata-1.png)
+![plot of chunk intervaldata](figure/interval-intervaldata-1.png)
 
 ```r
 #Max Avg steps over all intervals
@@ -89,10 +89,11 @@ replaced.df$steps[is.na(replaced.df$steps)]=replaced.df$avg.steps[is.na(replaced
 replaced.df=replaced.df[order(replaced.df$date, replaced.df$interval),]
 replaced.df.sum = aggregate(replaced.df$steps, by=list(date=replaced.df$date), FUN=sum, na.rm=FALSE)
 names(replaced.df.sum)=c("date", "steps")
+
 hist(replaced.df.sum$steps)
 ```
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
+![plot of chunk imputeddata](figure/imputed-imputeddata-1.png)
 
 ```r
 mean(replaced.df.sum$steps)
@@ -125,4 +126,4 @@ names(agg)=c("interval", "day", "avg.steps")
 xyplot(avg.steps~interval|day, data=agg, main="Avg. steps in 5-min interval", xlab="interval", ylab="avg. steps", type="l", layout=c(1,2))
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-1](figure/weekday-unnamed-chunk-1-1.png)
